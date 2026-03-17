@@ -48,7 +48,7 @@ export class ErrorBoundary extends Component<Props, State> {
             )}
             <button
               onClick={() => this.setState({ hasError: false, error: null })}
-              className="bg-emerald-700 hover:bg-emerald-600 text-white text-sm rounded px-4 py-2 mr-2 transition-colors"
+              className="bg-cyan-700 hover:bg-cyan-600 text-white text-sm rounded px-4 py-2 mr-2 transition-colors"
             >
               Try to Recover
             </button>

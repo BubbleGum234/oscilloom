@@ -72,7 +72,7 @@ export function CodePreviewPanel({
         <div className="text-xs text-slate-500 font-mono">Loading...</div>
       ) : codeData?.code ? (
         <>
-          <pre className="text-[10px] leading-relaxed font-mono text-green-300 whitespace-pre-wrap overflow-x-auto max-h-32 overflow-y-auto">
+          <pre className="text-[10px] leading-relaxed font-mono text-blue-300 whitespace-pre-wrap overflow-x-auto max-h-32 overflow-y-auto">
             {codeData.code}
           </pre>
           {codeData.docs_url && (

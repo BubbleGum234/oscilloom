@@ -43,7 +43,7 @@ export function AuditLogPanel({ log, onClear }: AuditLogPanelProps) {
               <div className="font-mono mt-0.5">
                 <span className="text-red-400">{String(entry.oldValue)}</span>
                 <span className="text-slate-600"> → </span>
-                <span className="text-emerald-400">{String(entry.newValue)}</span>
+                <span className="text-cyan-400">{String(entry.newValue)}</span>
                 {entry.unit && (
                   <span className="text-slate-600"> {entry.unit}</span>
                 )}

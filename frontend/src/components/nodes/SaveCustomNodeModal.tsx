@@ -62,7 +62,7 @@ export function SaveCustomNodeModal({ code, timeout, onClose }: SaveCustomNodeMo
         </div>
       </div>
       {saveResult && (
-        <div className={`text-[9px] mt-0.5 px-1 ${saveResult.includes("Saved") ? "text-green-400" : "text-red-400"}`}>
+        <div className={`text-[9px] mt-0.5 px-1 ${saveResult.includes("Saved") ? "text-cyan-400" : "text-red-400"}`}>
           {saveResult}
         </div>
       )}

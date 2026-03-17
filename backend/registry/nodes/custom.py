@@ -111,10 +111,9 @@ CUSTOM_PYTHON = NodeDescriptor(
     category="Custom",
     description=(
         "Run custom MNE-Python code in a sandboxed subprocess. "
-        "WARNING: This node executes code on your machine — only use code "
-        "you understand and trust. Your code receives `data` (the upstream "
-        "MNE object) and should assign your result to `data`. "
-        "Available: mne, numpy (as np). Max timeout: 2 minutes."
+        "\u26a0 EXECUTES CODE ON YOUR MACHINE \u2014 only use code you understand and trust. "
+        "Available variables: 'data' (input), 'np' (numpy), 'mne'. "
+        "Assign your result to 'result'. Max timeout: 2 minutes."
     ),
     tags=["custom", "python", "code", "advanced", "script"],
     inputs=[

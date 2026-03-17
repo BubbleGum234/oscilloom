@@ -416,7 +416,7 @@ function ParamControl({
         onChange={(e) => onChange(e.target.value)}
         spellCheck={false}
         rows={12}
-        className="w-full bg-gray-900 border border-gray-700 rounded p-3 text-green-400 text-xs font-mono resize-y focus:outline-none focus:border-slate-400 leading-relaxed"
+        className="w-full bg-gray-900 border border-gray-700 rounded p-3 text-blue-400 text-xs font-mono resize-y focus:outline-none focus:border-slate-400 leading-relaxed"
         placeholder="# Write your MNE-Python code here..."
       />
     );

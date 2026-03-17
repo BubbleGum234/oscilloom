@@ -357,7 +357,7 @@ export function NodeOutputInspector({
             )}
             {syncResult && (
               <div className={`text-[10px] px-1 py-0.5 rounded ${
-                syncStatus === "done" ? "text-green-400 bg-green-950/40" : "text-red-400 bg-red-950/40"
+                syncStatus === "done" ? "text-cyan-400 bg-cyan-950/40" : "text-red-400 bg-red-950/40"
               }`}>
                 {syncResult}
               </div>
@@ -367,7 +367,7 @@ export function NodeOutputInspector({
             {(kind === "raw" || kind === "epochs") && onExport && nodeId && (
               <button
                 onClick={() => onExport(nodeId, "fif", nodeLabel ?? "export")}
-                className="w-full px-2 py-1.5 text-[11px] rounded bg-emerald-600 hover:bg-emerald-700 text-white transition-colors"
+                className="w-full px-2 py-1.5 text-[11px] rounded bg-cyan-600 hover:bg-cyan-700 text-white transition-colors"
               >
                 ↓ Download .fif
               </button>

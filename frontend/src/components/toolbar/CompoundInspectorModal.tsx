@@ -43,7 +43,7 @@ const InspectorNode = ({ data }: NodeProps) => {
   const headerClass = CATEGORY_HEADER_COLORS[category] ?? "bg-gray-700 text-gray-100";
 
   let ringClass = "";
-  if (isEntry) ringClass = "ring-2 ring-green-400 ring-offset-1 ring-offset-transparent";
+  if (isEntry) ringClass = "ring-2 ring-cyan-400 ring-offset-1 ring-offset-transparent";
   else if (isOutput) ringClass = "ring-2 ring-orange-400 ring-offset-1 ring-offset-transparent";
 
   return (
@@ -71,7 +71,7 @@ const InspectorNode = ({ data }: NodeProps) => {
       <div className={`px-2 py-1.5 rounded-t-md flex items-center gap-2 ${headerClass}`}>
         <span className="font-semibold truncate text-[11px]">{label}</span>
         {isEntry && (
-          <span className="text-[9px] bg-green-600 text-green-100 px-1 rounded flex-shrink-0">
+          <span className="text-[9px] bg-cyan-600 text-cyan-100 px-1 rounded flex-shrink-0">
             IN
           </span>
         )}
@@ -352,7 +352,7 @@ export function CompoundInspectorModal({
               {/* Legend */}
               <div className="px-5 py-2 flex gap-4 text-[10px] text-slate-500 border-b border-slate-800">
                 <div className="flex items-center gap-1">
-                  <span className="inline-block w-2.5 h-2.5 rounded border-2 border-green-400" />
+                  <span className="inline-block w-2.5 h-2.5 rounded border-2 border-cyan-400" />
                   Entry node
                 </div>
                 <div className="flex items-center gap-1">

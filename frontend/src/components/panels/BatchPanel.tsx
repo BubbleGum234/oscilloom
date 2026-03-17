@@ -77,7 +77,7 @@ function MetricStatsRow({ name, stats }: { name: string; stats: MetricStats }) {
         {name.split(".").pop()}
       </td>
       <td className="py-1 px-1 text-slate-400 text-right">{stats.count}</td>
-      <td className="py-1 px-1 text-emerald-400 text-right font-mono">
+      <td className="py-1 px-1 text-cyan-400 text-right font-mono">
         {stats.mean.toFixed(3)}
       </td>
       <td className="py-1 px-1 text-slate-400 text-right font-mono">
@@ -306,7 +306,7 @@ export function BatchPanel({ batch, pipeline }: BatchPanelProps) {
                   />
                 </div>
                 <div className="flex gap-3 text-[10px] mt-1">
-                  <span className="text-emerald-400">
+                  <span className="text-cyan-400">
                     {batch.progress.completed} done
                   </span>
                   {batch.progress.failed > 0 && (
@@ -331,7 +331,7 @@ export function BatchPanel({ batch, pipeline }: BatchPanelProps) {
             {/* Summary cards */}
             <div className="grid grid-cols-3 gap-1.5">
               <div className="bg-slate-800 rounded p-2 text-center">
-                <div className="text-emerald-400 text-sm font-bold">
+                <div className="text-cyan-400 text-sm font-bold">
                   {batch.results.summary.completed}
                 </div>
                 <div className="text-slate-500 text-[10px]">Done</div>
@@ -475,7 +475,7 @@ export function BatchPanel({ batch, pipeline }: BatchPanelProps) {
                           </td>
                           <td className="py-1 px-1">
                             {fr.status === "success" ? (
-                              <span className="text-emerald-400">OK</span>
+                              <span className="text-cyan-400">OK</span>
                             ) : (
                               <span
                                 className="text-red-400"
@@ -703,7 +703,7 @@ export function BatchPanel({ batch, pipeline }: BatchPanelProps) {
             <button
               onClick={batch.downloadCsv}
               disabled={!batch.results?.metrics_csv}
-              className="bg-emerald-700 hover:bg-emerald-600 disabled:bg-slate-700 disabled:text-slate-500 text-white text-[10px] rounded px-2 py-1.5 transition-colors font-medium"
+              className="bg-cyan-700 hover:bg-cyan-600 disabled:bg-slate-700 disabled:text-slate-500 text-white text-[10px] rounded px-2 py-1.5 transition-colors font-medium"
             >
               CSV
             </button>

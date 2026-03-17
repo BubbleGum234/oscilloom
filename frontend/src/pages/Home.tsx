@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ConfirmDialog } from "../components/ui/ConfirmDialog";
 import {
-  Brain,
   Plus,
   Clock,
   Folder,
@@ -245,9 +244,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/20">
-                <Brain className="w-5 h-5 text-white" />
-              </div>
+              <img src="/favicon.png" alt="Oscilloom" className="w-9 h-9 rounded-lg shadow-lg shadow-cyan-500/20" />
               <div className="flex items-center gap-2.5">
                 <h1 className="text-xl font-bold text-slate-100 tracking-tight">
                   Oscilloom
@@ -285,7 +282,7 @@ export default function Home() {
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <button
                 onClick={handleNewWorkflow}
-                className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-sm font-medium rounded-lg px-5 py-2.5 transition-all shadow-lg shadow-emerald-600/20 hover:shadow-emerald-500/30"
+                className="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-500 active:bg-cyan-700 text-white text-sm font-medium rounded-lg px-5 py-2.5 transition-all shadow-lg shadow-cyan-600/20 hover:shadow-cyan-500/30"
               >
                 <Plus className="w-4 h-4" />
                 New Pipeline
@@ -357,7 +354,7 @@ export default function Home() {
               <div className="mt-5 flex items-center justify-center gap-3">
                 <button
                   onClick={handleNewWorkflow}
-                  className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium rounded-lg px-4 py-2 transition-colors"
+                  className="inline-flex items-center gap-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-medium rounded-lg px-4 py-2 transition-colors"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   Create Pipeline
@@ -395,7 +392,7 @@ export default function Home() {
                           if (e.key === "Escape") setRenamingId(null);
                         }}
                         onClick={(e) => e.stopPropagation()}
-                        className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-sm text-slate-200 focus:outline-none focus:border-emerald-500 flex-1 mr-2"
+                        className="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 flex-1 mr-2"
                       />
                     ) : (
                       <div className="flex items-center gap-2 flex-1 min-w-0 mr-2">
@@ -472,8 +469,8 @@ export default function Home() {
               <div className="inline-flex items-center gap-1.5">
                 {backendStatus.connected ? (
                   <>
-                    <Wifi className="w-3.5 h-3.5 text-emerald-500" />
-                    <span className="text-emerald-500/80">Backend connected</span>
+                    <Wifi className="w-3.5 h-3.5 text-cyan-500" />
+                    <span className="text-cyan-500/80">Backend connected</span>
                   </>
                 ) : (
                   <>

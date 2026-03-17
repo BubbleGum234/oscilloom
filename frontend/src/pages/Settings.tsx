@@ -379,7 +379,7 @@ export default function Settings() {
                 <ArrowLeft className="w-5 h-5" />
               </button>
               <div className="flex items-center gap-2.5">
-                <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/20">
+                <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 shadow-lg shadow-blue-500/20">
                   <Brain className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -476,8 +476,8 @@ export default function Settings() {
                   <Loader2 className="w-3.5 h-3.5 text-slate-500 animate-spin" />
                 ) : backendStatus.connected ? (
                   <>
-                    <Wifi className="w-3.5 h-3.5 text-emerald-500" />
-                    <span className="text-sm text-emerald-400 font-medium">
+                    <Wifi className="w-3.5 h-3.5 text-cyan-500" />
+                    <span className="text-sm text-cyan-400 font-medium">
                       Connected
                     </span>
                   </>

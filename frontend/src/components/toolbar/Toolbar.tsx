@@ -78,12 +78,13 @@ export function Toolbar({
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z" />
         </svg>
       </button>
+      <img src="/favicon.png" alt="Oscilloom" className="w-6 h-6 rounded" />
       <span className="text-slate-100 font-bold text-sm tracking-tight mr-1">
         Oscilloom
       </span>
       <div
         className={`w-2 h-2 rounded-full flex-shrink-0 transition-colors ${
-          sessionId ? "bg-emerald-500" : "bg-slate-600"
+          sessionId ? "bg-cyan-500" : "bg-slate-600"
         }`}
         title={sessionId ? "EEG session active" : "No file loaded"}
       />
@@ -111,7 +112,7 @@ export function Toolbar({
       <button
         onClick={onRun}
         disabled={running || !sessionId || loadingFile}
-        className="bg-emerald-700 hover:bg-emerald-600 disabled:bg-slate-800 disabled:text-slate-600 text-white text-[13px] rounded px-3 py-1.5 transition-colors font-medium"
+        className="bg-cyan-700 hover:bg-cyan-600 disabled:bg-slate-800 disabled:text-slate-600 text-white text-[13px] rounded px-3 py-1.5 transition-colors font-medium"
       >
         {running ? "Running\u2026" : loadingFile ? "Loading\u2026" : "\u25B6  Run"}
       </button>

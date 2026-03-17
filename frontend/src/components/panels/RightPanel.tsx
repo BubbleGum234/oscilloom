@@ -274,7 +274,7 @@ function TabButton({
       )}
       {/* Active indicator */}
       {active && (
-        <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-emerald-500 rounded-full" />
+        <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-violet-500 rounded-full" />
       )}
     </button>
   );

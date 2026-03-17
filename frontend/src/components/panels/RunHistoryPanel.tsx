@@ -127,7 +127,7 @@ export function RunHistoryPanel({
                 {run.errorCount > 0 ? (
                   <span className="text-red-400">· {run.errorCount} errors</span>
                 ) : (
-                  <span className="text-emerald-400">· all passed</span>
+                  <span className="text-cyan-400">· all passed</span>
                 )}
               </div>
 

@@ -197,7 +197,7 @@ export default function ExportModal({ isOpen, onClose, sessionId, pipeline, audi
                       <Download size={12} /> Download .py
                     </button>
                   </div>
-                  <pre className="bg-slate-900 text-green-300 p-4 rounded-lg text-xs font-mono overflow-auto max-h-96 leading-relaxed whitespace-pre">
+                  <pre className="bg-slate-900 text-blue-300 p-4 rounded-lg text-xs font-mono overflow-auto max-h-96 leading-relaxed whitespace-pre">
                     {scriptContent}
                   </pre>
                 </>

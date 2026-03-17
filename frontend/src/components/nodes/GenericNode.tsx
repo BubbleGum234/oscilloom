@@ -35,7 +35,7 @@ function StatusBadge({ result }: { result?: NodeResult | null }) {
               : `${(result.execution_time_ms / 1000).toFixed(1)}s`}
           </span>
         )}
-        <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-700 text-emerald-100 font-mono">
+        <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-700 text-cyan-100 font-mono">
           {result.output_type}
         </span>
       </div>
@@ -309,7 +309,7 @@ export const GenericNode = memo(({ id, data, selected }: NodeProps) => {
               />
             )}
             {!showSave && saveResult && (
-              <div className={`text-[9px] mt-0.5 px-1 ${saveResult.includes("Saved") ? "text-green-400" : "text-red-400"}`}>
+              <div className={`text-[9px] mt-0.5 px-1 ${saveResult.includes("Saved") ? "text-cyan-400" : "text-red-400"}`}>
                 {saveResult}
               </div>
             )}

@@ -322,7 +322,7 @@ export function ComparisonPanel({ runA, runB, onClose }: ComparisonPanelProps) {
               <div className="text-[10px] text-slate-500 mt-0.5">Output Changes</div>
             </div>
             <div className="bg-slate-800/60 rounded-lg p-3 text-center">
-              <div className="text-lg font-mono text-emerald-400">{metricsDiffs.length}</div>
+              <div className="text-lg font-mono text-cyan-400">{metricsDiffs.length}</div>
               <div className="text-[10px] text-slate-500 mt-0.5">Metric Diffs</div>
             </div>
           </div>
@@ -434,7 +434,7 @@ export function ComparisonPanel({ runA, runB, onClose }: ComparisonPanelProps) {
                       </div>
                     </div>
                     <div className={`text-center text-xs font-semibold rounded py-1 ${
-                      e.deltaPct < 0 ? "bg-emerald-900/40 text-emerald-400" : e.deltaPct > 0 ? "bg-red-900/40 text-red-400" : "bg-slate-800 text-slate-500"
+                      e.deltaPct < 0 ? "bg-cyan-900/40 text-cyan-400" : e.deltaPct > 0 ? "bg-red-900/40 text-red-400" : "bg-slate-800 text-slate-500"
                     }`}>
                       {e.deltaPct > 0 ? "+" : ""}{e.deltaPct.toFixed(1)}pp rejection change
                     </div>
@@ -479,7 +479,7 @@ export function ComparisonPanel({ runA, runB, onClose }: ComparisonPanelProps) {
                         <span
                           className={
                             d.delta > 0
-                              ? "text-emerald-400"
+                              ? "text-cyan-400"
                               : d.delta < 0
                               ? "text-red-400"
                               : "text-slate-500"

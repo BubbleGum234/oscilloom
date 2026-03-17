@@ -27,7 +27,6 @@ Process brain recordings without writing a single line of code. Everything runs 
 | Visual pipeline builder | | | | **Yes** |
 | Batch processing | Manual | Manual | Manual | **Built-in** |
 | Python script export | N/A | N/A | N/A | **Yes** |
-| PDF clinical reports | | | | **Yes** |
 | Modern UI | | | | **Yes** |
 
 ## Features
@@ -38,7 +37,6 @@ Process brain recordings without writing a single line of code. Everything runs 
 - **Compound nodes** — collapse sub-graphs into reusable blocks
 - **Data export** — CSV, NPZ, MAT, JSON, FIF, PNG per node
 - **Interactive browser** — MNE's data browser with annotation support
-- **PDF reports** — automated clinical reports with plots and metrics
 - **Script export** — generate standalone Python scripts for reproducibility
 - **5 file formats** — EDF, FIF, BrainVision, BDF, CNT
 
@@ -89,7 +87,6 @@ Open **http://localhost:5173** and start building pipelines.
 | **Analysis** | 5+ | PSD, Band Power, Peak Frequency, Statistics |
 | **ERP** | 4 | Average ERP, Grand Average, Peak Latency, Compare Evokeds |
 | **Connectivity** | 3 | Spectral Connectivity, Phase-Locking Value |
-| **Clinical** | 2 | Asymmetry Index, Amplitude Stats |
 | **Sleep** | 1 | Automated Sleep Staging |
 | **BCI** | 2 | CSP Features, Bandpower Features |
 | **Visualization** | 5+ | Plot Raw, Plot PSD, Topomap, ERP Plot, Comparison |

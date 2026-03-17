@@ -494,7 +494,7 @@ export function BatchModal({ onClose, pipeline }: BatchModalProps) {
             </div>
             <div className="w-full bg-slate-700 rounded-full h-2">
               <div
-                className="bg-emerald-500 h-2 rounded-full transition-all"
+                className="bg-cyan-500 h-2 rounded-full transition-all"
                 style={{
                   width: `${((progress.completed + progress.failed) / Math.max(progress.total, 1)) * 100}%`,
                 }}
@@ -520,7 +520,7 @@ export function BatchModal({ onClose, pipeline }: BatchModalProps) {
           <div className="flex-1 overflow-y-auto">
             <div className="grid grid-cols-3 gap-2 mb-3">
               <div className="bg-slate-700 rounded p-2 text-center">
-                <div className="text-emerald-400 text-lg font-bold">
+                <div className="text-cyan-400 text-lg font-bold">
                   {results.summary.completed}
                 </div>
                 <div className="text-slate-400 text-xs">Completed</div>
@@ -566,7 +566,7 @@ export function BatchModal({ onClose, pipeline }: BatchModalProps) {
                                 return next;
                               })
                             }
-                            className="accent-emerald-500"
+                            className="accent-cyan-500"
                           />
                         </td>
                         <td className="py-1 px-2 text-slate-300">
@@ -574,7 +574,7 @@ export function BatchModal({ onClose, pipeline }: BatchModalProps) {
                         </td>
                         <td className="py-1 px-2">
                           {fr.status === "success" ? (
-                            <span className="text-emerald-400">Success</span>
+                            <span className="text-cyan-400">Success</span>
                           ) : (
                             <span
                               className="text-red-400"
@@ -760,7 +760,7 @@ export function BatchModal({ onClose, pipeline }: BatchModalProps) {
               <button
                 onClick={handleStart}
                 disabled={selectedFiles.length === 0}
-                className="flex-1 bg-emerald-700 hover:bg-emerald-600 disabled:bg-slate-700 disabled:text-slate-500 text-white text-xs rounded px-3 py-2 transition-colors font-medium"
+                className="flex-1 bg-cyan-700 hover:bg-cyan-600 disabled:bg-slate-700 disabled:text-slate-500 text-white text-xs rounded px-3 py-2 transition-colors font-medium"
               >
                 Start Batch ({selectedFiles.length} files)
               </button>
@@ -796,7 +796,7 @@ export function BatchModal({ onClose, pipeline }: BatchModalProps) {
               <button
                 onClick={handleDownloadCsv}
                 disabled={!results?.metrics_csv}
-                className="flex-1 bg-emerald-700 hover:bg-emerald-600 disabled:bg-slate-700 disabled:text-slate-500 text-white text-xs rounded px-3 py-2 transition-colors font-medium"
+                className="flex-1 bg-cyan-700 hover:bg-cyan-600 disabled:bg-slate-700 disabled:text-slate-500 text-white text-xs rounded px-3 py-2 transition-colors font-medium"
               >
                 Download CSV
               </button>
