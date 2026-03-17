@@ -163,14 +163,6 @@ Adding a node requires exactly **2 file changes**:
 
 The engine, validation, export, and frontend palette pick it up automatically.
 
-## Roadmap
-
-- [ ] Desktop installer (Tauri — macOS, Windows, Linux)
-- [ ] Plugin system for community nodes
-- [ ] AI-assisted pipeline builder
-- [ ] Real-time streaming support
-- [ ] BIDS dataset integration
-
 ## License
 
 [Apache License 2.0](LICENSE.md)
