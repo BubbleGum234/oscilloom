@@ -16,7 +16,7 @@ export interface UseSessionManagerReturn {
 export function useSessionManager(
   setNodes: React.Dispatch<React.SetStateAction<Node[]>>,
   markDirty: () => void,
-  toast: (msg: string, type: string) => void,
+  toast: (msg: string, type?: "success" | "error" | "warning" | "info") => void,
 ): UseSessionManagerReturn {
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [sessionInfo, setSessionInfo] = useState<Record<string, unknown> | null>(null);

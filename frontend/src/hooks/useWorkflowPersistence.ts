@@ -31,7 +31,7 @@ export function useWorkflowPersistence(
   navigate: (path: string, opts?: { replace?: boolean }) => void,
   clearAudit: () => void,
   setSelectedNodeId: (id: string | null) => void,
-  toast: (msg: string, type: string) => void,
+  toast: (msg: string, type?: "success" | "error" | "warning" | "info") => void,
 ): UseWorkflowPersistenceReturn {
   // ── State ──────────────────────────────────────────────────────────────────
   const [pipelineName, setPipelineName] = useState("My Pipeline");

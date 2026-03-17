@@ -53,7 +53,16 @@ function StatusBadge({ result }: { result?: NodeResult | null }) {
 // ---------------------------------------------------------------------------
 
 export const GenericNode = memo(({ id, data, selected }: NodeProps) => {
-  const { descriptor, parameters, customLabel, nodeResult, sessionInfo, isRunning, batchMode, onRename } = data as NodeData;
+  const { descriptor, parameters, customLabel, nodeResult, sessionInfo, isRunning, batchMode, onRename } = data as {
+    descriptor: NodeData["descriptor"];
+    parameters: NodeData["parameters"];
+    customLabel: NodeData["customLabel"];
+    nodeResult: NodeData["nodeResult"];
+    sessionInfo: NodeData["sessionInfo"];
+    isRunning: NodeData["isRunning"];
+    batchMode: NodeData["batchMode"];
+    onRename: NodeData["onRename"];
+  };
   const { deleteElements } = useReactFlow();
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const closeLightbox = useCallback(() => setLightboxSrc(null), []);

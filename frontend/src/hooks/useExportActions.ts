@@ -30,7 +30,7 @@ export function useExportActions(
   auditLog: AuditLogEntry[],
   result: ExecuteResponse | null,
   sessionInfo: Record<string, unknown> | null,
-  toast: (msg: string, type: string) => void,
+  toast: (msg: string, type?: "success" | "error" | "warning" | "info") => void,
 ): UseExportActionsReturn {
   const [loadingExport, setLoadingExport] = useState(false);
   const [loadingFif, setLoadingFif] = useState(false);
@@ -114,7 +114,7 @@ export function useExportActions(
           clinicName,
           sessionInfo: sessionInfo,
           pipelineConfig,
-          auditLog,
+          auditLog: auditLog as unknown as Array<Record<string, unknown>>,
           notes,
           sections,
           includedNodes,

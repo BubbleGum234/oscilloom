@@ -110,7 +110,7 @@ export function PublishAsNodeModal({
         display_name: name.trim(),
         description: description.trim() || `Compound node: ${name.trim()}`,
         tags: ["compound"],
-        sub_graph: pipeline as Record<string, unknown>,
+        sub_graph: pipeline as unknown as Record<string, unknown>,
         entry_node_id: entryNodes[0].id,
         output_node_id: outputNodeId,
         exposed_params: selected.map((p) => ({

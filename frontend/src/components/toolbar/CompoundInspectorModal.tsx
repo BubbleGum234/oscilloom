@@ -28,6 +28,7 @@ interface CompoundInspectorModalProps {
 // ---------------------------------------------------------------------------
 
 interface InspectorNodeData {
+  [key: string]: unknown;
   label: string;
   category: string;
   isEntry: boolean;

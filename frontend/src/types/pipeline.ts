@@ -81,7 +81,6 @@ export interface PipelineGraph {
 }
 
 export interface AuditLogEntry {
-  [key: string]: unknown;
   timestamp: string;
   nodeId: string;
   nodeDisplayName: string;
