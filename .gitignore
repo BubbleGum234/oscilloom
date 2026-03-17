@@ -75,3 +75,4 @@ src-tauri/target/
 # Misc
 *.log
 *.tmp
+validation/
