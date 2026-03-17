@@ -109,6 +109,9 @@ def _execute_compute_sleep_stages(input_data, params: dict) -> dict:
         raw, eeg_name=eeg_name, eog_name=eog_name, emg_name=emg_name
     )
     predicted = sls.predict()  # array of str: 'W', 'N1', 'N2', 'N3', 'R'
+    # YASA >= 0.7 returns a Hypnogram object instead of a plain array
+    if hasattr(predicted, "hypno"):
+        predicted = list(predicted.hypno)
 
     label_to_int = {"W": 0, "N1": 1, "N2": 2, "N3": 3, "R": 4}
     hypno_int = [label_to_int.get(s, -1) for s in predicted]
