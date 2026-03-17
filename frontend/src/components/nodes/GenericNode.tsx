@@ -1,6 +1,6 @@
 import { memo, useState, useCallback } from "react";
 import { Handle, Position, type NodeProps, useReactFlow } from "@xyflow/react";
-import type { NodeResult, NodeData } from "../../types/pipeline";
+import type { NodeResult, NodeTypeDescriptor, SessionInfo } from "../../types/pipeline";
 import { getHandleHex, CATEGORY_COLORS, CATEGORY_STRIPE_HEX } from "../../utils/handleColors";
 import { SURFACE } from "../../constants/theme";
 import { SessionInfoPanel } from "./SessionInfoPanel";
@@ -53,7 +53,16 @@ function StatusBadge({ result }: { result?: NodeResult | null }) {
 // ---------------------------------------------------------------------------
 
 export const GenericNode = memo(({ id, data, selected }: NodeProps) => {
-  const { descriptor, parameters, customLabel, nodeResult, sessionInfo, isRunning, batchMode, onRename } = data as NodeData;
+  const { descriptor, parameters, customLabel, nodeResult, sessionInfo, isRunning, batchMode, onRename } = data as unknown as {
+    descriptor: NodeTypeDescriptor;
+    parameters: Record<string, unknown>;
+    customLabel?: string;
+    nodeResult?: NodeResult | null;
+    sessionInfo?: SessionInfo | null;
+    isRunning?: boolean;
+    batchMode?: boolean;
+    onRename?: (newLabel: string) => void;
+  };
   const { deleteElements } = useReactFlow();
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const closeLightbox = useCallback(() => setLightboxSrc(null), []);
@@ -130,10 +139,10 @@ export const GenericNode = memo(({ id, data, selected }: NodeProps) => {
             onChange={(e) => setEditValue(e.target.value)}
             onBlur={() => {
               setEditing(false);
-              onRename?.(id, editValue.trim());
+              onRename?.(editValue.trim());
             }}
             onKeyDown={(e) => {
-              if (e.key === "Enter") { setEditing(false); onRename?.(id, editValue.trim()); }
+              if (e.key === "Enter") { setEditing(false); onRename?.(editValue.trim()); }
               if (e.key === "Escape") { setEditing(false); }
             }}
           />
@@ -254,7 +263,7 @@ export const GenericNode = memo(({ id, data, selected }: NodeProps) => {
         )}
 
         {/* Custom Python node: show first 3 lines of code as preview */}
-        {descriptor.node_type === "custom_python" && parameters.code && (
+        {descriptor.node_type === "custom_python" && !!parameters.code && (
           <pre
             className="text-[9px] font-mono text-orange-300/80 bg-slate-900/50 rounded px-1.5 py-1 whitespace-pre-wrap overflow-hidden leading-tight"
             style={{ maxHeight: "3.6em" }}

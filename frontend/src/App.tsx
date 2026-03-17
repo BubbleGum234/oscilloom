@@ -28,7 +28,6 @@ import ExportModal from "./components/toolbar/ExportModal";
 import BidsExportModal from "./components/toolbar/BidsExportModal";
 
 import { openMneBrowser, exportNodeOutput, executeFromNode } from "./api/client";
-import type { PipelineTemplate } from "./api/client";
 import { serializePipeline } from "./utils/serializePipeline";
 import { getNextNodeId } from "./utils/nodeId";
 import type { ParameterSchema, NodeData } from "./types/pipeline";
@@ -72,8 +71,8 @@ export default function App() {
 
   // ── Workflow persistence (must come before hooks that need markDirty) ──
   const {
-    pipelineName, setPipelineName, currentWorkflowId,
-    markDirty, markClean,
+    pipelineName, setPipelineName,
+    markDirty,
     handleSavePipeline, handleLoadPipeline, handleClear,
     showClearConfirm, confirmClear, cancelClear,
   } = useWorkflowPersistence(
@@ -394,74 +393,6 @@ export default function App() {
   );
   nodeRenameRef.current = handleNodeRename;
 
-  // ── Apply pipeline template ──────────────────────────────────────────────
-  const _handleApplyTemplate = useCallback(
-    (template: PipelineTemplate) => {
-      if (!registry) return;
-
-      // Map template node IDs to real canvas node IDs.
-      const idMap: Record<string, string> = {};
-      const newNodes: Node[] = [];
-      const startX = 100;
-      const startY = 100;
-      const ySpacing = 140;
-
-      for (let i = 0; i < template.nodes.length; i++) {
-        const tplNode = template.nodes[i];
-        const descriptor = registry[tplNode.node_type];
-        if (!descriptor) continue;
-
-        const id = getNextNodeId();
-        idMap[tplNode.id] = id;
-
-        const defaultParams: Record<string, unknown> = {};
-        for (const p of descriptor.parameters) {
-          defaultParams[p.name] = p.default;
-        }
-        // Override defaults with template-specified params.
-        for (const [k, v] of Object.entries(tplNode.params)) {
-          defaultParams[k] = v;
-        }
-
-        newNodes.push({
-          id,
-          type: "genericNode",
-          position: { x: startX, y: startY + i * ySpacing },
-          data: {
-            descriptor,
-            parameters: defaultParams,
-            label: tplNode.label || descriptor.display_name,
-            nodeResult: null,
-            sessionInfo: null,
-          },
-        });
-      }
-
-      const newEdges: Edge[] = [];
-      for (const tplEdge of template.edges) {
-        const sourceId = idMap[tplEdge.source];
-        const targetId = idMap[tplEdge.target];
-        if (!sourceId || !targetId) continue;
-
-        newEdges.push({
-          id: `edge_${sourceId}_${targetId}`,
-          source: sourceId,
-          sourceHandle: tplEdge.source_handle,
-          target: targetId,
-          targetHandle: tplEdge.target_handle,
-          type: "smoothstep",
-          animated: false,
-        });
-      }
-
-      setNodes((nds) => [...nds, ...newNodes]);
-      setEdges((eds) => [...eds, ...newEdges]);
-      markDirty();
-      toast(`Added template: ${template.name}`, "success");
-    },
-    [registry, setNodes, setEdges, markDirty, toast]
-  );
-
   // ── Compound node inspection (double-click) ─────────────────────────────
   const handleNodeDoubleClick = useCallback((node: Node) => {
     const descriptor = (node.data as NodeData).descriptor;
@@ -621,7 +552,7 @@ export default function App() {
               onFileLoad={handleFileLoad}
               onDownloadFif={handleDownloadFif}
               selectionCount={selectionCount}
-              sessionInfo={sessionInfo as import("./types/pipeline").SessionInfo | undefined}
+              sessionInfo={sessionInfo as unknown as import("./types/pipeline").SessionInfo | undefined}
               nodeResult={selectedNodeId
                 ? (viewingHistoryResult ?? result?.node_results)?.[selectedNodeId] ?? null
                 : null}
