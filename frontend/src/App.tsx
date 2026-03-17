@@ -395,7 +395,7 @@ export default function App() {
   nodeRenameRef.current = handleNodeRename;
 
   // ── Apply pipeline template ──────────────────────────────────────────────
-  const handleApplyTemplate = useCallback(
+  const _handleApplyTemplate = useCallback(
     (template: PipelineTemplate) => {
       if (!registry) return;
 

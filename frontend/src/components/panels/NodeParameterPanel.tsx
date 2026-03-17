@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import type { Node } from "@xyflow/react";
-import type { NodeTypeDescriptor, ParameterSchema, SessionInfo, NodeData } from "../../types/pipeline";
+import type { ParameterSchema, SessionInfo, NodeData } from "../../types/pipeline";
 import { SURFACE } from "../../constants/theme";
 
 interface NodeParameterPanelProps {

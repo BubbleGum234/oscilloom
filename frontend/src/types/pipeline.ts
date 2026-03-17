@@ -81,6 +81,7 @@ export interface PipelineGraph {
 }
 
 export interface AuditLogEntry {
+  [key: string]: unknown;
   timestamp: string;
   nodeId: string;
   nodeDisplayName: string;
@@ -260,6 +261,7 @@ export interface SavedBatchSummary {
 
 /** Data payload for every node on the React Flow canvas. */
 export interface NodeData {
+  [key: string]: unknown;
   descriptor: NodeTypeDescriptor;
   parameters: Record<string, unknown>;
   label: string;

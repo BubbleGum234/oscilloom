@@ -19,7 +19,6 @@ import {
   saveBatchResults,
   listSavedBatches,
   loadSavedBatch,
-  deleteBatchJob,
 } from "../api/client";
 import type { ReportSections, BatchReportConfig } from "../api/client";
 
