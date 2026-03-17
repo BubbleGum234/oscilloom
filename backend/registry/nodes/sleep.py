@@ -109,9 +109,12 @@ def _execute_compute_sleep_stages(input_data, params: dict) -> dict:
         raw, eeg_name=eeg_name, eog_name=eog_name, emg_name=emg_name
     )
     predicted = sls.predict()  # array of str: 'W', 'N1', 'N2', 'N3', 'R'
-    # YASA >= 0.7 returns a Hypnogram object instead of a plain array
+    # YASA >= 0.7 returns a Hypnogram object with labels like 'WAKE', 'REM'
     if hasattr(predicted, "hypno"):
         predicted = list(predicted.hypno)
+    # Normalize YASA 0.7 long labels to short form used throughout Oscilloom
+    _long_to_short = {"WAKE": "W", "REM": "R", "ART": "W", "UNS": "W"}
+    predicted = [_long_to_short.get(s, s) for s in predicted]
 
     label_to_int = {"W": 0, "N1": 1, "N2": 2, "N3": 3, "R": 4}
     hypno_int = [label_to_int.get(s, -1) for s in predicted]
@@ -199,7 +202,11 @@ COMPUTE_SLEEP_STAGES = NodeDescriptor(
         + (f', eeg_name="{p["eeg_channel"]}"' if p.get("eeg_channel") else "")
         + (f', eog_name="{p["eog_channel"]}"' if p.get("eog_channel") else "")
         + (f', emg_name="{p["emg_channel"]}"' if p.get("emg_channel") else "")
-        + ")\nhypnogram = sls.predict()"
+        + ")\n_pred = sls.predict()\n"
+        "if hasattr(_pred, 'hypno'):\n"
+        "    _pred = list(_pred.hypno)\n"
+        "_long = {'WAKE': 'W', 'REM': 'R', 'ART': 'W', 'UNS': 'W'}\n"
+        "hypnogram = [_long.get(s, s) for s in _pred]"
     ),
     methods_template=lambda p: (
         "Automatic sleep staging was performed using YASA's pre-trained "
