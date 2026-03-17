@@ -1,0 +1,18 @@
+Oscilloom
+Copyright 2026 Oscilloom Contributors
+
+This product includes software developed by the Oscilloom project
+(https://github.com/oscilloom/oscilloom).
+
+Oscilloom uses the following open-source libraries:
+
+  - MNE-Python (BSD-3-Clause) — https://mne.tools/
+  - FastAPI (MIT) — https://fastapi.tiangolo.com/
+  - React (MIT) — https://react.dev/
+  - React Flow / xyflow (MIT) — https://reactflow.dev/
+  - Tailwind CSS (MIT) — https://tailwindcss.com/
+  - YASA (BSD-3-Clause) — https://raphaelvallat.com/yasa/
+  - scikit-learn (BSD-3-Clause) — https://scikit-learn.org/
+  - mne-connectivity (BSD-3-Clause) — https://mne.tools/mne-connectivity/
+  - mne-bids (BSD-3-Clause) — https://mne.tools/mne-bids/
+  - autoreject (BSD-3-Clause) — https://autoreject.github.io/

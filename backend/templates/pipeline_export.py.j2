@@ -1,0 +1,65 @@
+{#
+  backend/templates/pipeline_export.py.j2
+
+  Jinja2 template for Python script export.
+
+  Available template variables:
+    pipeline       PipelineGraph object
+    ordered_nodes  list of dicts: {node, descriptor, params, code_snippet}
+    audit_log      list of AuditLogEntry dicts from the frontend
+    timestamp      str — "YYYY-MM-DD HH:MM:SS"
+
+  Each node's code_snippet is pre-computed by script_exporter.py from
+  the NodeDescriptor's code_template callable. No per-node-type logic
+  lives in this template.
+
+  Jinja2 settings: trim_blocks=True, lstrip_blocks=True (set in script_exporter.py).
+  This means block tags ({% %}) do not emit blank lines, keeping the output clean.
+#}
+# =============================================================================
+# Oscilloom Pipeline Export
+# Generated : {{ timestamp }}
+# Pipeline  : {{ pipeline.metadata.name }}
+# Version   : {{ pipeline.metadata.schema_version }}
+# Created by: {{ pipeline.metadata.created_by }}
+#
+# {{ pipeline.metadata.description }}
+#
+{% if audit_log %}
+# AUDIT LOG — parameter changes made during this session:
+{% for entry in audit_log %}
+# [{{ entry.timestamp }}] {{ entry.nodeDisplayName }} ({{ entry.nodeId }}):
+#     {{ entry.paramLabel }} changed {{ entry.oldValue }} → {{ entry.newValue }}{% if entry.unit is defined and entry.unit %} {{ entry.unit }}{% endif %}
+
+{% endfor %}
+#
+{% endif %}
+# To reproduce this pipeline:
+#   pip install mne matplotlib
+#   python {{ pipeline.metadata.name | replace(" ", "_") | lower }}.py
+#
+# All MNE parameters are explicit below. No hidden defaults.
+# =============================================================================
+
+import mne
+import matplotlib
+matplotlib.use("Agg")  # Non-interactive backend for script execution
+import matplotlib.pyplot as plt
+
+{% for node_entry in ordered_nodes %}
+{% set node = node_entry.node %}
+{% set descriptor = node_entry.descriptor %}
+{% set params = node_entry.params %}
+# -----------------------------------------------------------------------------
+# {{ loop.index }}. {{ node.label }} [{{ node.node_type }}]
+# {{ descriptor.description | wordwrap(76, wrapstring="\n# ") }}
+# -----------------------------------------------------------------------------
+{% if node_entry.code_snippet %}
+{{ node_entry.code_snippet }}
+print(f"{{ node.node_type }} complete.")
+{% else %}
+# NOTE: Node type "{{ node.node_type }}" does not have a code template yet.
+print("SKIPPED: Node '{{ node.node_type }}' ({{ node.label }}) — no export template available.")
+{% endif %}
+{% endfor %}
+print("Pipeline complete.")

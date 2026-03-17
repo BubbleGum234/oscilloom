@@ -1,0 +1,77 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+.venv/
+build/
+dist/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/.env.local
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+
+# EEG data files (large binaries, potential PII)
+*.edf
+*.bdf
+*.fif
+*.set
+*.vhdr
+*.vmrk
+*.eeg
+*.cnt
+
+# Generated outputs
+eeg_report.pdf
+batch_results/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code project config (developer-specific)
+.claude/
+CLAUDE.md
+
+# Internal docs (not for public release)
+docs/researcher-eval-*.md
+docs/IMPROVEMENT_PLAN.md
+docs/UI_IMPROVEMENT_PLAN.md
+docs/FEATURE_IMPLEMENTATION_PLAN.md
+docs/MCP_IMPLEMENTATION_PLAN.md
+
+# Benchmarks (developer testing only)
+benchmarks/
+
+# Sample EEG data (too large for git; downloaded separately)
+sample_data/
+
+# Test compound nodes (not real examples)
+compounds/c_test*.json
+compounds/c_evil*.json
+
+# Tauri build artifacts
+src-tauri/target/
+
+# Misc
+*.log
+*.tmp

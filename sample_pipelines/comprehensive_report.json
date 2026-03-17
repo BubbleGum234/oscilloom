@@ -1,0 +1,268 @@
+{
+  "metadata": {
+    "name": "Comprehensive EEG Report",
+    "description": "Full clinical pipeline: preprocessing, PSD analysis, fixed-length epoching, 4 visualizations, 4 clinical metrics with interpretation. Designed for PhysioNet Motor Imagery EDF files (64ch, 160Hz).",
+    "created_by": "human",
+    "schema_version": "1.0"
+  },
+  "nodes": [
+    {
+      "id": "load_eeg",
+      "node_type": "edf_loader",
+      "label": "Load EEG",
+      "parameters": { "file_path": "" },
+      "position": { "x": 50, "y": 300 }
+    },
+    {
+      "id": "notch",
+      "node_type": "notch_filter",
+      "label": "60 Hz Notch Filter",
+      "parameters": { "notch_freq_hz": 60.0 },
+      "position": { "x": 300, "y": 300 }
+    },
+    {
+      "id": "bandpass",
+      "node_type": "bandpass_filter",
+      "label": "1-40 Hz Bandpass",
+      "parameters": {
+        "low_cutoff_hz": 1.0,
+        "high_cutoff_hz": 40.0,
+        "method": "fir"
+      },
+      "position": { "x": 550, "y": 300 }
+    },
+    {
+      "id": "psd",
+      "node_type": "compute_psd",
+      "label": "Compute PSD (Welch)",
+      "parameters": {
+        "method": "welch",
+        "fmin": 0.5,
+        "fmax": 60.0,
+        "n_fft": 256,
+        "n_overlap": 128
+      },
+      "position": { "x": 800, "y": 150 }
+    },
+    {
+      "id": "epochs",
+      "node_type": "epoch_by_time",
+      "label": "2s Fixed Epochs",
+      "parameters": {
+        "duration_s": 2.0,
+        "overlap_s": 0.0
+      },
+      "position": { "x": 800, "y": 450 }
+    },
+    {
+      "id": "viz_raw",
+      "node_type": "plot_raw",
+      "label": "Raw Signal Plot",
+      "parameters": {
+        "n_channels": 16,
+        "start_time_s": 5.0,
+        "duration_s": 10.0,
+        "n_panels": 1,
+        "scale_uv": 0.0
+      },
+      "position": { "x": 800, "y": 600 }
+    },
+    {
+      "id": "viz_psd",
+      "node_type": "plot_psd",
+      "label": "PSD Plot",
+      "parameters": {
+        "dB": true,
+        "show_average": true
+      },
+      "position": { "x": 1100, "y": 0 }
+    },
+    {
+      "id": "viz_epochs",
+      "node_type": "plot_epochs_image",
+      "label": "Epochs Image",
+      "parameters": { "n_trials": 0 },
+      "position": { "x": 1100, "y": 400 }
+    },
+    {
+      "id": "evoked",
+      "node_type": "compute_evoked",
+      "label": "Compute Evoked (ERP)",
+      "parameters": {},
+      "position": { "x": 1100, "y": 520 }
+    },
+    {
+      "id": "viz_evoked",
+      "node_type": "plot_evoked",
+      "label": "ERP Butterfly Plot",
+      "parameters": { "titles": "" },
+      "position": { "x": 1400, "y": 520 }
+    },
+    {
+      "id": "alpha_peak",
+      "node_type": "compute_alpha_peak",
+      "label": "Alpha Peak (IAF)",
+      "parameters": {
+        "fmin": 7.0,
+        "fmax": 13.0,
+        "method": "cog"
+      },
+      "position": { "x": 1100, "y": 100 }
+    },
+    {
+      "id": "band_ratio",
+      "node_type": "compute_band_ratio",
+      "label": "Theta/Beta Ratio",
+      "parameters": {
+        "numerator_fmin": 4.0,
+        "numerator_fmax": 8.0,
+        "denominator_fmin": 13.0,
+        "denominator_fmax": 30.0,
+        "log_scale": true
+      },
+      "position": { "x": 1100, "y": 200 }
+    },
+    {
+      "id": "asymmetry",
+      "node_type": "compute_asymmetry",
+      "label": "Frontal Alpha Asymmetry",
+      "parameters": {
+        "fmin": 8.0,
+        "fmax": 13.0,
+        "left_channel": "F3..",
+        "right_channel": "F4.."
+      },
+      "position": { "x": 1100, "y": 300 }
+    },
+    {
+      "id": "spikes",
+      "node_type": "detect_spikes",
+      "label": "Spike Detection",
+      "parameters": {
+        "threshold_uv": 100.0,
+        "min_duration_ms": 10.0,
+        "max_duration_ms": 100.0
+      },
+      "position": { "x": 800, "y": 750 }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source_node_id": "load_eeg",
+      "source_handle_id": "eeg_out",
+      "source_handle_type": "raw_eeg",
+      "target_node_id": "notch",
+      "target_handle_id": "eeg_in",
+      "target_handle_type": "raw_eeg"
+    },
+    {
+      "id": "e2",
+      "source_node_id": "notch",
+      "source_handle_id": "eeg_out",
+      "source_handle_type": "filtered_eeg",
+      "target_node_id": "bandpass",
+      "target_handle_id": "filtered_in",
+      "target_handle_type": "filtered_eeg"
+    },
+    {
+      "id": "e3",
+      "source_node_id": "bandpass",
+      "source_handle_id": "eeg_out",
+      "source_handle_type": "filtered_eeg",
+      "target_node_id": "psd",
+      "target_handle_id": "eeg_in",
+      "target_handle_type": "filtered_eeg"
+    },
+    {
+      "id": "e4",
+      "source_node_id": "bandpass",
+      "source_handle_id": "eeg_out",
+      "source_handle_type": "filtered_eeg",
+      "target_node_id": "epochs",
+      "target_handle_id": "filtered_in",
+      "target_handle_type": "filtered_eeg"
+    },
+    {
+      "id": "e5",
+      "source_node_id": "bandpass",
+      "source_handle_id": "eeg_out",
+      "source_handle_type": "filtered_eeg",
+      "target_node_id": "viz_raw",
+      "target_handle_id": "filtered_in",
+      "target_handle_type": "filtered_eeg"
+    },
+    {
+      "id": "e6",
+      "source_node_id": "psd",
+      "source_handle_id": "psd_out",
+      "source_handle_type": "psd",
+      "target_node_id": "viz_psd",
+      "target_handle_id": "psd_in",
+      "target_handle_type": "psd"
+    },
+    {
+      "id": "e7",
+      "source_node_id": "psd",
+      "source_handle_id": "psd_out",
+      "source_handle_type": "psd",
+      "target_node_id": "alpha_peak",
+      "target_handle_id": "psd_in",
+      "target_handle_type": "psd"
+    },
+    {
+      "id": "e8",
+      "source_node_id": "psd",
+      "source_handle_id": "psd_out",
+      "source_handle_type": "psd",
+      "target_node_id": "band_ratio",
+      "target_handle_id": "psd_in",
+      "target_handle_type": "psd"
+    },
+    {
+      "id": "e9",
+      "source_node_id": "psd",
+      "source_handle_id": "psd_out",
+      "source_handle_type": "psd",
+      "target_node_id": "asymmetry",
+      "target_handle_id": "psd_in",
+      "target_handle_type": "psd"
+    },
+    {
+      "id": "e10",
+      "source_node_id": "epochs",
+      "source_handle_id": "epochs_out",
+      "source_handle_type": "epochs",
+      "target_node_id": "viz_epochs",
+      "target_handle_id": "epochs_in",
+      "target_handle_type": "epochs"
+    },
+    {
+      "id": "e11",
+      "source_node_id": "epochs",
+      "source_handle_id": "epochs_out",
+      "source_handle_type": "epochs",
+      "target_node_id": "evoked",
+      "target_handle_id": "epochs_in",
+      "target_handle_type": "epochs"
+    },
+    {
+      "id": "e12",
+      "source_node_id": "evoked",
+      "source_handle_id": "evoked_out",
+      "source_handle_type": "evoked",
+      "target_node_id": "viz_evoked",
+      "target_handle_id": "evoked_in",
+      "target_handle_type": "evoked"
+    },
+    {
+      "id": "e13",
+      "source_node_id": "bandpass",
+      "source_handle_id": "eeg_out",
+      "source_handle_type": "filtered_eeg",
+      "target_node_id": "spikes",
+      "target_handle_id": "filtered_in",
+      "target_handle_type": "filtered_eeg"
+    }
+  ]
+}

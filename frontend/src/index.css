@@ -1,0 +1,249 @@
+@import "tailwindcss";
+@import "@xyflow/react/dist/style.css";
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color-scheme: dark;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #0f1117;
+  color: #e2e8f0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.react-flow__background {
+  background-color: #0f1117;
+}
+
+.react-flow__edge-path {
+  stroke-width: 2;
+}
+
+/* Phase 5: Pipeline execution animations */
+@keyframes nf-border-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes nf-dash-flow {
+  to { stroke-dashoffset: -20; }
+}
+
+.nf-node-running {
+  animation: nf-border-pulse 1s ease-in-out infinite;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+.nf-node-success::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.nf-node-error::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ef4444;
+}
+
+.nf-edge-active .react-flow__edge-path {
+  stroke-dasharray: 5 5;
+  animation: nf-dash-flow 0.6s linear infinite;
+}
+
+/* Phase 6: Presentation Mode — light theme for academic screenshots */
+.presentation-mode {
+  --nf-canvas-bg: #fafbfc;
+  --nf-node-bg: #ffffff;
+  --nf-node-header: #f1f5f9;
+  --nf-text: #1a1a2e;
+  --nf-text-muted: #475569;
+  --nf-border: #e2e8f0;
+  --nf-grid-dot: #cbd5e1;
+}
+
+.presentation-mode .react-flow__background {
+  background-color: var(--nf-canvas-bg) !important;
+}
+
+.presentation-mode .react-flow__edge-path {
+  stroke: #64748b !important;
+}
+
+.presentation-mode .react-flow__controls button {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #1a1a2e !important;
+}
+
+.presentation-mode .react-flow__minimap {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Node cards in presentation mode */
+.presentation-mode [data-presentation-node] {
+  background: var(--nf-node-bg) !important;
+  border-color: var(--nf-border) !important;
+  color: var(--nf-text) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+}
+
+.presentation-mode [data-presentation-header] {
+  background: var(--nf-node-header) !important;
+  color: var(--nf-text) !important;
+}
+
+.presentation-mode [data-presentation-node] .text-slate-200,
+.presentation-mode [data-presentation-node] .text-slate-300,
+.presentation-mode [data-presentation-node] .text-slate-400,
+.presentation-mode [data-presentation-node] .text-slate-100 {
+  color: var(--nf-text) !important;
+}
+
+/* Light theme overrides */
+.light-theme {
+  color-scheme: light;
+}
+
+.light-theme body,
+.light-theme #root {
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+/* Canvas background */
+.light-theme .react-flow__background {
+  background-color: #f8fafc !important;
+}
+
+/* Override all the dark background colors used throughout the app */
+/* Main backgrounds */
+.light-theme .bg-\[\#0f1117\] {
+  background-color: #f8fafc !important;
+}
+
+/* Slate backgrounds used for cards, panels, sidebars */
+.light-theme .bg-slate-900\/60,
+.light-theme .bg-slate-900\/80,
+.light-theme .bg-slate-900\/90,
+.light-theme .bg-slate-900 {
+  background-color: #ffffff !important;
+}
+
+.light-theme .bg-slate-800\/60,
+.light-theme .bg-slate-800\/80,
+.light-theme .bg-slate-800\/40,
+.light-theme .bg-slate-800 {
+  background-color: #f1f5f9 !important;
+}
+
+.light-theme .bg-slate-950 {
+  background-color: #f8fafc !important;
+}
+
+/* Borders */
+.light-theme .border-slate-800\/80,
+.light-theme .border-slate-800\/60,
+.light-theme .border-slate-800\/50,
+.light-theme .border-slate-800,
+.light-theme .border-slate-700\/60,
+.light-theme .border-slate-700 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Text colors */
+.light-theme .text-slate-200,
+.light-theme .text-slate-100 {
+  color: #1e293b !important;
+}
+
+.light-theme .text-slate-300 {
+  color: #334155 !important;
+}
+
+.light-theme .text-slate-400 {
+  color: #64748b !important;
+}
+
+.light-theme .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+.light-theme .text-slate-600 {
+  color: #94a3b8 !important;
+}
+
+/* Hover states */
+.light-theme .hover\:bg-slate-800\/60:hover,
+.light-theme .hover\:bg-slate-800:hover,
+.light-theme .hover\:bg-slate-700\/60:hover {
+  background-color: #e2e8f0 !important;
+}
+
+.light-theme .hover\:text-slate-200:hover,
+.light-theme .hover\:text-slate-100:hover {
+  color: #0f172a !important;
+}
+
+/* Backdrop blur panels */
+.light-theme .bg-\[\#0f1117\]\/90 {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+}
+
+/* React Flow controls and minimap */
+.light-theme .react-flow__controls button {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #1e293b !important;
+}
+
+.light-theme .react-flow__minimap {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+.light-theme .react-flow__edge-path {
+  stroke: #64748b !important;
+}
+
+/* Node specific overrides */
+.light-theme .react-flow__node {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+}
+
+/* Scrollbar styling for light theme */
+.light-theme ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.light-theme ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+.light-theme ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
