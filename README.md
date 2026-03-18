@@ -44,7 +44,7 @@ Process brain recordings without writing a single line of code. Everything runs 
 
 ```bash
 # 1. Clone and set up backend
-git clone https://github.com/YOUR_USERNAME/oscilloom.git
+git clone https://github.com/BubbleGum234/oscilloom.git
 cd oscilloom
 python -m venv .venv
 source .venv/bin/activate    # Windows: .venv\Scripts\activate
