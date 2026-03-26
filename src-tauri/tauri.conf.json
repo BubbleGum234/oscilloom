@@ -1,0 +1,67 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nicbarker/tauri-conf-schema/main/v2.json",
+  "productName": "Oscilloom",
+  "version": "1.0.0",
+  "identifier": "com.oscilloom.app",
+  "build": {
+    "frontendDist": "../frontend/dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "cd frontend && npm run dev",
+    "beforeBuildCommand": "cd frontend && npm run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Oscilloom — EEG Pipeline Builder",
+        "width": 1400,
+        "height": 900,
+        "resizable": true,
+        "fullscreen": false,
+        "center": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": ["oscilloom-server*"],
+    "macOS": {
+      "minimumSystemVersion": "10.15"
+    },
+    "windows": {
+      "wix": {
+        "language": "en-US"
+      }
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDI2NzA0RkNDMENDOTk0NzkKUldSNWxNa016RTl3Sm80b0ZmRURWRU50ZFZzMTIxNWZqMmpTM3JvMUo4eTk3Vm51N1RGMG1naEwK",
+      "endpoints": [
+        "https://github.com/BubbleGum234/oscilloom/releases/latest/download/latest.json"
+      ],
+      "dialog": true
+    },
+    "shell": {
+      "sidecar": true,
+      "scope": [
+        {
+          "name": "oscilloom-server",
+          "cmd": "oscilloom-server",
+          "args": true
+        }
+      ]
+    }
+  }
+}
