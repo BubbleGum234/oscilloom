@@ -1,10 +1,11 @@
 name: Build Installers
 
-# Triggers when you create a release tag like v1.0.0
+# Triggers on release tags OR manual dispatch (for testing)
 on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
 permissions:
   contents: write
